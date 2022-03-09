@@ -22,6 +22,7 @@
 
 #include <Arduino.h>
 #include <api/HardwareSPI.h>
+#include <Adafruit_ZeroDMA.h>
 
 // SPI_HAS_TRANSACTION means SPI has
 //   - beginTransaction()
@@ -49,6 +50,10 @@ class SPIClassSAMD : public arduino::HardwareSPI {
   byte transfer(uint8_t data);
   uint16_t transfer16(uint16_t data);
   void transfer(void *buf, size_t count);
+  void transfer(const void* txbuf, void* rxbuf, size_t count,
+         bool block = true);
+  void waitForTransfer(void);
+  bool isBusy(void);
 
   // Transaction Functions
   void usingInterrupt(int interruptNumber);
@@ -66,6 +71,20 @@ class SPIClassSAMD : public arduino::HardwareSPI {
   void setBitOrder(BitOrder order);
   void setDataMode(uint8_t uc_mode);
   void setClockDivider(uint8_t uc_div);
+
+  // SERCOM lookup functions are available on both SAMD51 and 21.
+  volatile uint32_t *getDataRegister(void);
+  int getDMAC_ID_TX(void);
+  int getDMAC_ID_RX(void);
+  uint8_t getSercomIndex(void) { return _p_sercom->getSercomIndex(); };
+#if defined(__SAMD51__)
+  // SERCOM clock source override is available only on SAMD51.
+  void setClockSource(SercomClockSource clk);
+#else
+  // On SAMD21, this compiles to nothing, so user code doesn't need to
+  // check and conditionally compile lines for different architectures.
+  void setClockSource(SercomClockSource clk) { (void)clk; };
+#endif // end __SAMD51__
 
   private:
   void init();
@@ -85,6 +104,18 @@ class SPIClassSAMD : public arduino::HardwareSPI {
   uint8_t interruptMode;
   char interruptSave;
   uint32_t interruptMask;
+
+  // transfer(txbuf, rxbuf, count, block) uses DMA when possible
+  Adafruit_ZeroDMA readChannel;
+  Adafruit_ZeroDMA writeChannel;
+  DmacDescriptor  *firstReadDescriptor   = NULL;  // List entry point
+  DmacDescriptor  *firstWriteDescriptor  = NULL;
+  DmacDescriptor  *extraReadDescriptors  = NULL;  // Add'l descriptors
+  DmacDescriptor  *extraWriteDescriptors = NULL;
+  bool             use_dma               = false; // true on successful alloc
+  volatile bool    dma_busy              = false;
+  void             dmaAllocate(void);
+  static void      dmaCallback(Adafruit_ZeroDMA *dma);
 };
 
 //#define SPIClass SPIClassSAMD
