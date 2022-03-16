@@ -280,7 +280,7 @@ void SPIClassSAMD::transfer(void *buf, size_t count)
 // Pointer to SPIClass object, one per DMA channel. This allows the
 // DMA callback (which has to exist outside the class context) to have
 // a reference back to the originating SPIClass object.
-static SPIClass *spiPtr[DMAC_CH_NUM] = { 0 }; // Legit inits list to NULL
+static SPIClassSAMD *spiPtr[DMAC_CH_NUM] = { 0 }; // Legit inits list to NULL
 
 void SPIClassSAMD::dmaCallback(Adafruit_ZeroDMA *dma) {
   // dmaCallback() receives an Adafruit_ZeroDMA object. From this we can get
