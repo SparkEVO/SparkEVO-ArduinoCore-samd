@@ -18,7 +18,7 @@ tarname = "SparkEVO-ArduinoCore-samd-" + version + ".tar.gz"
 if os.path.exists(tarname):
     os.remove(tarname)
 
-with tarfile.open(tarname,"w:gz", format=tarfile.GNU_FORMAT) as tar:
+with tarfile.open(tarname,"w:gz", dereference=True, format=tarfile.GNU_FORMAT) as tar:
     files = os.listdir(".")
     for file in files:
         if file.startswith(".git") or file.endswith(".tar.gz") or file == ".":
