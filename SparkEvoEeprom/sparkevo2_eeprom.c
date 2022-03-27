@@ -19,6 +19,7 @@ extern EepromStruct GetDefaultEeprom()
 {
   EepromStruct eeprom;
   eeprom.STRUCT_VERSION = EEPROM_VERSION;
+  eeprom.LOCK_PIN = 0;
   eeprom.MAP_SWITCH_ENABLED = false;
   eeprom.MAP_SWITCH_MAP1 = 0;
   eeprom.MAP_SWITCH_MAP2 = 0;
@@ -31,6 +32,7 @@ extern EepromStruct GetDefaultEeprom()
   eeprom.POWERJET_ENABLED = false;
   eeprom.POWERJET_RPM_THRESHOLD = 0;
   eeprom.POWERJET_DUTY = 0;
+  eeprom.INJECTION_ENABLED = false;
   eeprom.STATS_RUNTIME = 0;
   eeprom.STATS_MAX_RPM = 0;
   eeprom.STATS_OUTPUT_ERRORS = 0;
@@ -39,7 +41,6 @@ extern EepromStruct GetDefaultEeprom()
   eeprom.CURRENT_MAP_ID = 0;
   eeprom.LIMITER_ENABLED = false;
   eeprom.RPM_LIMIT = 0;
-  eeprom.INJECTION_ENABLED = false;
   
   return eeprom;
 }

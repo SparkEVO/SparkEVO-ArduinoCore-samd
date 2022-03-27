@@ -15,6 +15,7 @@ typedef struct {
 
 typedef struct {
   byte STRUCT_VERSION;
+  unsigned short LOCK_PIN;
   // map switch
   bool MAP_SWITCH_ENABLED;
   byte MAP_SWITCH_MAP1;
@@ -28,20 +29,21 @@ typedef struct {
   bool INPUT_POLARITY;
   bool EXTERNAL_BATTERY;
   // output enable
-  bool OUTPUT1_ENABLE;
-  unsigned int OUTPUT1_RPM_THRESHOLD;
+  bool POWERJET_ENABLED;
+  unsigned int POWERJET_RPM_THRESHOLD;
+  unsigned int POWERJET_DUTY;
   // statistics
   unsigned int STATS_RUNTIME;
   unsigned int STATS_MAX_RPM;
-  unsigned int STATS_TEMPERATURE_ALARMS;
-  unsigned int STATS_OUTPUT_TIMEOUT_ERRORS;
+  unsigned int STATS_OUTPUT_ERRORS;
   unsigned int STATS_STARTUPS;
   // map system
   float BASE_TIMING_ANGLE;
   byte CURRENT_MAP_ID;
   // rpm limiter
   bool LIMITER_ENABLED;
-  unsigned int  RPM_LIMIT;
+  unsigned int RPM_LIMIT;
+  bool INJECTION_ENABLED;
 } EepromStruct;
 
 extern Eeprom0Struct eeprom0;
