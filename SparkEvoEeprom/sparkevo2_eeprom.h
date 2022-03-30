@@ -2,6 +2,8 @@
 
 #include <stddef.h>
 
+#define unsigned char byte
+
 #define EEPROM0_VERSION 1
 #define EEPROM_VERSION  1
 
