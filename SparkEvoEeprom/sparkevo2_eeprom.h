@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduino.h>
+#include <stddef.h>
 
 #define EEPROM0_VERSION 1
 #define EEPROM_VERSION  1
