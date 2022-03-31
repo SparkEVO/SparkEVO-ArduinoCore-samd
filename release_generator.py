@@ -24,9 +24,9 @@ with tarfile.open(tarname,"w:gz", dereference=True, format=tarfile.GNU_FORMAT) a
         if file.startswith(".git") or file.endswith(".tar.gz") or file == "ArduinoCore-API" or file == ".":
             continue
         tar.add(file, arcname="SparkEVO-ArduinoCore-samd/" + os.path.basename(file), recursive=True)
+    # add API module
+    tar.add("ArduinoCore-API/api", arcname="SparkEVO-ArduinoCore-samd/cores/arduino/api", recursive=True)
 
-# add API module
-tar.add("ArduinoCore-API/api", arcname="SparkEVO-ArduinoCore-samd/cores/arduino/api", recursive=True)
 
 print("\"checksum\": \"SHA-256:" + sha256sum(tarname) + "\",")
 print("\"size\": \"" + str(os.path.getsize(tarname)) + "\",")
