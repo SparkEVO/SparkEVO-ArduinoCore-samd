@@ -19,9 +19,9 @@ typedef struct {
   byte STRUCT_VERSION;
   unsigned short LOCK_PIN;
   // map switch
-  bool MAP_SWITCH_ENABLED;
-  byte MAP_SWITCH_MAP1;
-  byte MAP_SWITCH_MAP2;
+  bool MAPRT_SWITCH_ENABLED;
+  byte MAPRT_SWITCH_MAP1;
+  byte MAPRT_SWITCH_MAP2;
   // gear shift
   bool GEAR_SHIFT_ENABLED;
   unsigned int GEAR_SHIFT_DELAY;
@@ -41,10 +41,12 @@ typedef struct {
   unsigned int STATS_STARTUPS;
   // map system
   float BASE_TIMING_ANGLE;
-  byte CURRENT_MAP_ID;
-  // rpm limiter
+  float BASE_INJECTOR_ANGLE;
+  byte CURRENT_MAPRT_ID;
+  byte CURRENT_MAPRTI_ID;
+  byte CURRENT_MAPRTA_ID;
+  unsigned int BASE_LIMITER_RPM; // rpm limiter for base timing map
   bool LIMITER_ENABLED;
-  unsigned int RPM_LIMIT;
   bool INJECTION_ENABLED;
 } EepromStruct;
 
@@ -65,27 +67,30 @@ inline EepromStruct getDefaultEeprom(void)
   EepromStruct eeprom;
   eeprom.STRUCT_VERSION = EEPROM_VERSION;
   eeprom.LOCK_PIN = 0;
-  eeprom.MAP_SWITCH_ENABLED = false;
-  eeprom.MAP_SWITCH_MAP1 = 0;
-  eeprom.MAP_SWITCH_MAP2 = 0;
+  eeprom.MAPRT_SWITCH_ENABLED = false;
+  eeprom.MAPRT_SWITCH_MAP1 = 0;
+  eeprom.MAPRT_SWITCH_MAP2 = 0;
   eeprom.GEAR_SHIFT_ENABLED = false;
   eeprom.GEAR_SHIFT_DELAY = 0;
   eeprom.PULSE_WIDTH = 0;
   eeprom.INPUT_SIGNAL_PER_TURN = 0;
-  eeprom.INPUT_POLARITY = 0;
+  eeprom.INPUT_POLARITY = false;
   eeprom.EXTERNAL_BATTERY = false;
   eeprom.POWERJET_ENABLED = false;
   eeprom.POWERJET_RPM_THRESHOLD = 0;
   eeprom.POWERJET_DUTY = 0;
-  eeprom.INJECTION_ENABLED = false;
   eeprom.STATS_RUNTIME = 0;
   eeprom.STATS_MAX_RPM = 0;
   eeprom.STATS_OUTPUT_ERRORS = 0;
   eeprom.STATS_STARTUPS = 0;
   eeprom.BASE_TIMING_ANGLE = 0;
-  eeprom.CURRENT_MAP_ID = 0;
+  eeprom.BASE_INJECTOR_ANGLE = 0;
+  eeprom.CURRENT_MAPRT_ID = 0;
+  eeprom.CURRENT_MAPRTI_ID = 0;
+  eeprom.CURRENT_MAPRTA_ID = 0;
+  eeprom.BASE_LIMITER_RPM = 0;
   eeprom.LIMITER_ENABLED = false;
-  eeprom.RPM_LIMIT = 0;
+  eeprom.INJECTION_ENABLED = false;
   
   return eeprom;
 }
