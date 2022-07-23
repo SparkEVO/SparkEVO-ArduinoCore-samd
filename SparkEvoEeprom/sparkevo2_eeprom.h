@@ -44,7 +44,7 @@ typedef struct {
   float BASE_INJECTOR_ANGLE;
   byte CURRENT_MAPRT_ID;
   byte CURRENT_MAPRTI_ID;
-  byte CURRENT_MAPRTA_ID;
+  byte CURRENT_MAPRTP_ID;
   unsigned int BASE_LIMITER_RPM; // rpm limiter for base timing map
   bool LIMITER_ENABLED;
   bool INJECTION_ENABLED;
@@ -87,7 +87,7 @@ inline EepromStruct getDefaultEeprom(void)
   eeprom.BASE_INJECTOR_ANGLE = 0;
   eeprom.CURRENT_MAPRT_ID = 0;
   eeprom.CURRENT_MAPRTI_ID = 0;
-  eeprom.CURRENT_MAPRTA_ID = 0;
+  eeprom.CURRENT_MAPRTP_ID = 0;
   eeprom.BASE_LIMITER_RPM = 0;
   eeprom.LIMITER_ENABLED = false;
   eeprom.INJECTION_ENABLED = false;
