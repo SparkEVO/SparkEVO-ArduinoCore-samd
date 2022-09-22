@@ -13,7 +13,7 @@ def sha256sum(filename):
     return h.hexdigest()
 
 
-version = "1.0.3"
+version = "1.0.4"
 tarname = "SparkEVO-ArduinoCore-samd-" + version + ".tar.gz"
 if os.path.exists(tarname):
     os.remove(tarname)

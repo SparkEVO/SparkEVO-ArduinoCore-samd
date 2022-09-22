@@ -71,9 +71,6 @@ sparkevo_two_native.menu.opt.fast=Fast (-O2)
 sparkevo_two_native.menu.opt.fast.build.flags.optimize=-O2
 sparkevo_two_native.menu.opt.faster=Faster (-O3)
 sparkevo_two_native.menu.opt.faster.build.flags.optimize=-O3
-sparkevo_two_native.menu.opt.fastest=Fastest (-Ofast)
-sparkevo_two_native.menu.opt.fastest.build.flags.optimize=-Ofast
-
 
 sparkevo_two_native.menu.hwrev.d1=Dev 1
 sparkevo_two_native.menu.hwrev.d1.build.extra_flags=-DHW_REVISION_D1 -D__SAMD21G18A__ {build.usb_flags}
