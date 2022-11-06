@@ -1,6 +1,14 @@
 [submodule "libraries/Adafruit_ZeroDMA"]
 	path = libraries/Adafruit_ZeroDMA
-	url = git@github.com:adafruit/Adafruit_ZeroDMA.git
+	url = https://github.com/adafruit/Adafruit_ZeroDMA
 [submodule "ArduinoCore-API"]
 	path = ArduinoCore-API
-	url = git@github.com:arduino/ArduinoCore-API.git
+	url = https://github.com/arduino/ArduinoCore-API
+[submodule "libraries/Adafruit_SPIFlash"]
+	path = libraries/Adafruit_SPIFlash
+	url = https://github.com/SparkEVO/Adafruit_SPIFlash
+	branch = sparkevo-dev
+[submodule "libraries/SdFat"]
+	path = libraries/SdFat
+	url = https://github.com/adafruit/SdFat
+	branch = master
