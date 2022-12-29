@@ -30,10 +30,6 @@ typedef struct {
   byte INPUT_SIGNAL_PER_TURN;
   bool INPUT_POLARITY;
   bool EXTERNAL_BATTERY;
-  // output enable
-  bool POWERJET_ENABLED;
-  unsigned int POWERJET_RPM_THRESHOLD;
-  unsigned int POWERJET_DUTY;
   // statistics
   unsigned int STATS_RUNTIME;
   unsigned int STATS_MAX_RPM;
@@ -42,12 +38,15 @@ typedef struct {
   // map system
   float BASE_TIMING_ANGLE;
   float BASE_INJECTOR_ANGLE;
-  byte CURRENT_MAPRT_ID;
-  byte CURRENT_MAPRTI_ID;
-  byte CURRENT_MAPRTP_ID;
+  byte CURRENT_MAP_TIMING_ID;
+  byte CURRENT_MAP_INJECTOR_ID;
+  byte CURRENT_MAP_POWERJET_ID;
+  byte CURRENT_MAP_POWERVALVE_ID;
   unsigned int BASE_LIMITER_RPM; // rpm limiter for base timing map
   bool LIMITER_ENABLED;
   bool INJECTION_ENABLED;
+  bool POWERJET_ENABLED;
+  bool POWERVALVE_ENABLED;
 } EepromStruct;
 
 inline Eeprom0Struct getDefaultEeprom0()
@@ -76,21 +75,21 @@ inline EepromStruct getDefaultEeprom(void)
   eeprom.INPUT_SIGNAL_PER_TURN = 0;
   eeprom.INPUT_POLARITY = false;
   eeprom.EXTERNAL_BATTERY = false;
-  eeprom.POWERJET_ENABLED = false;
-  eeprom.POWERJET_RPM_THRESHOLD = 0;
-  eeprom.POWERJET_DUTY = 0;
   eeprom.STATS_RUNTIME = 0;
   eeprom.STATS_MAX_RPM = 0;
   eeprom.STATS_OUTPUT_ERRORS = 0;
   eeprom.STATS_STARTUPS = 0;
   eeprom.BASE_TIMING_ANGLE = 0;
   eeprom.BASE_INJECTOR_ANGLE = 0;
-  eeprom.CURRENT_MAPRT_ID = 0;
-  eeprom.CURRENT_MAPRTI_ID = 0;
-  eeprom.CURRENT_MAPRTP_ID = 0;
+  eeprom.CURRENT_MAP_TIMING_ID = 0;
+  eeprom.CURRENT_MAP_INJECTOR_ID = 0;
+  eeprom.CURRENT_MAP_POWERJET_ID = 0;
+  eeprom.CURRENT_MAP_POWERVALVE_ID = 0;
   eeprom.BASE_LIMITER_RPM = 0;
   eeprom.LIMITER_ENABLED = false;
   eeprom.INJECTION_ENABLED = false;
+  eeprom.POWERJET_ENABLED = false;
+  eeprom.POWERVALVE_ENABLED = false;
   
   return eeprom;
 }
