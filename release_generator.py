@@ -2,6 +2,11 @@ import tarfile
 import os
 import hashlib
 import mmap
+import argparse
+
+parser = argparse.ArgumentParser("SparkEVO Arduino Package generator")
+parser.add_argument("version", help="Package version")
+args = parser.parse_args()
 
 def sha256sum(filename):
     h  = hashlib.sha256()
@@ -13,7 +18,7 @@ def sha256sum(filename):
     return h.hexdigest()
 
 
-version = "1.0.7"
+version = args.version
 tarname = "SparkEVO-ArduinoCore-samd-" + version + ".tar.gz"
 if os.path.exists(tarname):
     os.remove(tarname)
@@ -27,6 +32,14 @@ with tarfile.open(tarname,"w:gz", dereference=True, format=tarfile.GNU_FORMAT) a
     # add API module
     tar.add("ArduinoCore-API/api", arcname="SparkEVO-ArduinoCore-samd/cores/arduino/api", recursive=True)
 
-
+print()
+print("\"name\": \"SparkEVO SAMD Boards (32-bits ARM Cortex-M0+)\",")
+print("\"architecture\": \"samd\",")
+print("\"version\": \"" + version + "\",")
+print("\"category\": \"SparkEVO\",")
+print("\"help\": {\"online\": \"https://sparkevo.racing/\"},")
+print("\"url\": \"https://sparkevo.racing/resources/internal/arduino-board-index/boards/" + tarname + "\",")
+print("\"archiveFileName\": \"" + tarname + "\",")
 print("\"checksum\": \"SHA-256:" + sha256sum(tarname) + "\",")
 print("\"size\": \"" + str(os.path.getsize(tarname)) + "\",")
+print()

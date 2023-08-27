@@ -20,7 +20,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
 name=SparkEVO SAMD (32-bits ARM Cortex-M0+) Boards
-version=1.0.4
+version=1.0.8
 
 # Compile variables
 # -----------------
@@ -33,8 +33,8 @@ compiler.warning_flags.all=-Wall -Wextra
 
 # EXPERIMENTAL feature: optimization flags
 #  - this is alpha and may be subject to change without notice
-compiler.optimization_flags=-Os
-compiler.optimization_flags.release=-Os
+compiler.optimization_flags=-O2
+compiler.optimization_flags.release=-O2
 compiler.optimization_flags.debug=-Og -g3
 
 compiler.path={runtime.tools.arm-none-eabi-gcc-7-2017q4.path}/bin/
