@@ -12,3 +12,7 @@
 	path = libraries/SdFat
 	url = https://github.com/adafruit/SdFat
 	branch = master
+[submodule "libraries/littlefs"]
+	path = libraries/littlefs
+	url = https://github.com/littlefs-project/littlefs
+	branch = master
