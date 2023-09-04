@@ -16,3 +16,7 @@
 	path = libraries/littlefs
 	url = https://github.com/littlefs-project/littlefs
 	branch = master
+[submodule "libraries/SPIMemory"]
+	path = libraries/SPIMemory
+	url = https://github.com/Marzogh/SPIMemory
+	branch = master
