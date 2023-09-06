@@ -16,3 +16,7 @@
 	path = libraries/littlefs
 	url = https://github.com/littlefs-project/littlefs
 	branch = master
+[submodule "libraries/FlashStorage_SAMD"]
+	path = libraries/FlashStorage_SAMD
+	url = https://github.com/khoih-prog/FlashStorage_SAMD
+	branch = master
