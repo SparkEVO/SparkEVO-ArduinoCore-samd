@@ -13,7 +13,7 @@ typedef struct {
   int DEVICE_SERIAL_NUMBER;
   int HW_REVISION;
   unsigned int LICENSE_NUMBER;
-} Eeprom0Struct;
+} __attribute__((packed)) Eeprom0Struct;
 
 inline Eeprom0Struct getDefaultEeprom0()
 {
