@@ -2,14 +2,12 @@
 
 #include <stddef.h>
 
-typedef unsigned char byte;
-
 #define EEPROM0_VERSION 1
 #define EEPROM_VERSION  1
 
 typedef struct {
-  byte STRUCT_VERSION;
-  byte DEVICE_TYPE;
+  uint8_t STRUCT_VERSION;
+  uint8_t DEVICE_TYPE;
   int DEVICE_SERIAL_NUMBER;
   int HW_REVISION;
   unsigned int LICENSE_NUMBER;
