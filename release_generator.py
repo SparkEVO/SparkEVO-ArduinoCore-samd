@@ -19,6 +19,16 @@ def sha256sum(filename):
 
 
 version = args.version
+
+# update platform.txt
+platform = open("platform.txt.source", "rt");
+platform_str = platform.read()
+platform_str = platform_str.replace('[[VERSION]]', str(version))
+platform.close()
+platform = open("platform.txt", "wt");
+platform.write(platform_str)
+platform.close()
+
 tarname = "SparkEVO-ArduinoCore-samd-" + version + ".tar.gz"
 if os.path.exists(tarname):
     os.remove(tarname)
@@ -33,7 +43,7 @@ with tarfile.open(tarname,"w:gz", dereference=True, format=tarfile.GNU_FORMAT) a
     tar.add("ArduinoCore-API/api", arcname="SparkEVO-ArduinoCore-samd/cores/arduino/api", recursive=True)
 
 print()
-print("\"name\": \"SparkEVO SAMD Boards (32-bits ARM Cortex-M0+)\",")
+print("\"name\": \"SparkEVO SAMD Boards\",")
 print("\"architecture\": \"samd\",")
 print("\"version\": \"" + version + "\",")
 print("\"category\": \"SparkEVO\",")
