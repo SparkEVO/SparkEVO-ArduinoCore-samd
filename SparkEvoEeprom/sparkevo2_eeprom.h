@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdint.h>
 
 #define EEPROM0_VERSION 1
 #define EEPROM_VERSION  1

@@ -2,3 +2,7 @@
 
 bootloaders/*/build/
 SparkEVO-ArduinoCore-samd-*.tar.gz
+*--end-group.res
+*.out
+*.o
+*.s
