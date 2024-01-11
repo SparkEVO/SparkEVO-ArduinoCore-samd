@@ -19,26 +19,6 @@
 
 #if defined(BOARD_ID_arduino_zero)
   #include "board_definitions_arduino_zero.h"
-#elif defined(BOARD_ID_arduino_mkr1000)
-  #include "board_definitions_arduino_mkr1000.h"
-#elif defined(BOARD_ID_arduino_mkrzero)
-  #include "board_definitions_arduino_mkrzero.h"
-#elif defined(BOARD_ID_arduino_mkrfox1200)
-  #include "board_definitions_arduino_mkrfox1200.h"
-#elif defined(BOARD_ID_arduino_mkrgsm1400)
-  #include "board_definitions_arduino_mkrgsm1400.h"
-#elif defined(BOARD_ID_arduino_mkrwan1300)
-  #include "board_definitions_arduino_mkrwan1300.h"
-#elif defined(BOARD_ID_arduino_mkrwan1310)
-  #include "board_definitions_arduino_mkrwan1310.h"
-#elif defined(BOARD_ID_arduino_mkrwifi1010)
-  #include "board_definitions_arduino_mkrwifi1010.h"
-#elif defined(BOARD_ID_arduino_mkrvidor4000)
-  #include "board_definitions_arduino_mkrvidor4000.h"
-#elif defined(BOARD_ID_arduino_mkrnb1500)
-  #include "board_definitions_arduino_mkrnb1500.h"
-#elif defined(BOARD_ID_arduino_nano_33_iot)
-  #include "board_definitions_arduino_nano_33_iot.h"
 #elif defined(BOARD_ID_sparkevo_itronix)
   #include "board_definitions_sparkevo_itronix.h"
 #else
