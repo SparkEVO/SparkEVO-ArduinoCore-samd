@@ -19,7 +19,7 @@ menu.hwrev=Hardware revision
 
 # SparkEVO 2 (Native USB Port)
 # --------------------------------------
-sparkevo_itronix_native.name=SparkEVO iTronix (Native USB port)
+sparkevo_itronix_native.name=SparkEVO iTronix
 sparkevo_itronix_native.vid.0=0x2341
 sparkevo_itronix_native.pid.0=0x804d
 sparkevo_itronix_native.vid.1=0x2341
