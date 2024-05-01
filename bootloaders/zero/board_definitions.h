@@ -21,8 +21,8 @@
   #include "board_definitions_arduino_zero.h"
 #elif defined(BOARD_ID_sparkevo_itronix)
   #include "board_definitions_sparkevo_itronix.h"
-#elif defined(BOARD_ID_sparkevo_timeshot2)
-  #include "board_definitions_sparkevo_timeshot2.h"
+#elif defined(BOARD_ID_sparkevo_timeshot)
+  #include "board_definitions_sparkevo_timeshot.h"
 #else
   #error You must define a BOARD_ID and add the corresponding definitions in board_definitions.h
 #endif

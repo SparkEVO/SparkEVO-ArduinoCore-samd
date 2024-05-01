@@ -20,16 +20,18 @@ menu.hwrev=Hardware revision
 # SparkEVO 2 (Native USB Port)
 # --------------------------------------
 sparkevo_itronix_native.name=SparkEVO iTronix
-sparkevo_itronix_native.vid.0=0x2341
-sparkevo_itronix_native.pid.0=0x804d
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_itronix_native.vid.0=0x04d8
+sparkevo_itronix_native.pid.0=0x000a
 sparkevo_itronix_native.vid.1=0x2341
 sparkevo_itronix_native.pid.1=0x004d
 sparkevo_itronix_native.vid.2=0x2341
 sparkevo_itronix_native.pid.2=0x824d
 sparkevo_itronix_native.vid.3=0x2341
 sparkevo_itronix_native.pid.3=0x024d
-sparkevo_itronix_native.upload_port.0.vid=0x2341
-sparkevo_itronix_native.upload_port.0.pid=0x804d
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_itronix_native.upload_port.0.vid=0x04d8
+sparkevo_itronix_native.upload_port.0.pid=0x000a
 sparkevo_itronix_native.upload_port.1.vid=0x2341
 sparkevo_itronix_native.upload_port.1.pid=0x004d
 sparkevo_itronix_native.upload_port.2.vid=0x2341
@@ -58,8 +60,9 @@ sparkevo_itronix_native.build.ldscript=linker_scripts/gcc/flash_with_bootloader.
 sparkevo_itronix_native.build.openocdscript=openocd_scripts/arduino_zero.cfg
 sparkevo_itronix_native.build.variant=arduino_zero
 sparkevo_itronix_native.build.variant_system_lib=
-sparkevo_itronix_native.build.vid=0x2341
-sparkevo_itronix_native.build.pid=0x804d
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_itronix_native.build.vid=0x04d8
+sparkevo_itronix_native.build.pid=0x000a
 sparkevo_itronix_native.bootloader.tool=openocd
 sparkevo_itronix_native.bootloader.tool.default=openocd
 sparkevo_itronix_native.bootloader.file=sparkevo_itronix/samd21_sam_ba_sparkevo_itronix.bin
@@ -73,57 +76,60 @@ sparkevo_itronix_native.menu.opt.faster=Faster (-O3)
 sparkevo_itronix_native.menu.opt.faster.build.flags.optimize=-O3
 
 
-# Time Shot 2 (Native USB Port)
+# Time Shot (Native USB Port)
 # --------------------------------------
-sparkevo_timeshot2_native.name=SparkEVO Time Shot 2
-sparkevo_timeshot2_native.vid.0=0x2341
-sparkevo_timeshot2_native.pid.0=0x804d
-sparkevo_timeshot2_native.vid.1=0x2341
-sparkevo_timeshot2_native.pid.1=0x004d
-sparkevo_timeshot2_native.vid.2=0x2341
-sparkevo_timeshot2_native.pid.2=0x824d
-sparkevo_timeshot2_native.vid.3=0x2341
-sparkevo_timeshot2_native.pid.3=0x024d
-sparkevo_timeshot2_native.upload_port.0.vid=0x2341
-sparkevo_timeshot2_native.upload_port.0.pid=0x804d
-sparkevo_timeshot2_native.upload_port.1.vid=0x2341
-sparkevo_timeshot2_native.upload_port.1.pid=0x004d
-sparkevo_timeshot2_native.upload_port.2.vid=0x2341
-sparkevo_timeshot2_native.upload_port.2.pid=0x824d
-sparkevo_timeshot2_native.upload_port.3.vid=0x2341
-sparkevo_timeshot2_native.upload_port.3.pid=0x024d
-sparkevo_timeshot2_native.upload_port.4.board=sparkevo_timeshot2_native
+sparkevo_timeshot_native.name=SparkEVO Time Shot
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_timeshot_native.vid.0=0x04d8
+sparkevo_timeshot_native.pid.0=0x000a
+sparkevo_timeshot_native.vid.1=0x2341
+sparkevo_timeshot_native.pid.1=0x004d
+sparkevo_timeshot_native.vid.2=0x2341
+sparkevo_timeshot_native.pid.2=0x824d
+sparkevo_timeshot_native.vid.3=0x2341
+sparkevo_timeshot_native.pid.3=0x024d
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_timeshot_native.upload_port.0.vid=0x04d8
+sparkevo_timeshot_native.upload_port.0.pid=0x000a
+sparkevo_timeshot_native.upload_port.1.vid=0x2341
+sparkevo_timeshot_native.upload_port.1.pid=0x004d
+sparkevo_timeshot_native.upload_port.2.vid=0x2341
+sparkevo_timeshot_native.upload_port.2.pid=0x824d
+sparkevo_timeshot_native.upload_port.3.vid=0x2341
+sparkevo_timeshot_native.upload_port.3.pid=0x024d
+sparkevo_timeshot_native.upload_port.4.board=sparkevo_timeshot_native
 
-sparkevo_timeshot2_native.upload.tool=bossac
-sparkevo_timeshot2_native.upload.tool.default=bossac
-sparkevo_timeshot2_native.upload.tool.network=arduino_ota
-sparkevo_timeshot2_native.upload.protocol=sam-ba
-sparkevo_timeshot2_native.upload.maximum_size=262144
-sparkevo_timeshot2_native.upload.maximum_data_size=32768
-sparkevo_timeshot2_native.upload.use_1200bps_touch=true
-sparkevo_timeshot2_native.upload.wait_for_upload_port=true
-sparkevo_timeshot2_native.upload.native_usb=true
-sparkevo_timeshot2_native.build.mcu=cortex-m0plus
-sparkevo_timeshot2_native.build.f_cpu=48000000L
-sparkevo_timeshot2_native.build.usb_product="SparkEVO Time Shot"
-sparkevo_timeshot2_native.build.usb_manufacturer="SparkEVO"
-sparkevo_timeshot2_native.build.board=SAMD_ZERO
-sparkevo_timeshot2_native.build.core=arduino
-sparkevo_timeshot2_native.build.extra_flags=-D__SAMD21G18A__ -DEXTERNAL_FLASH_USE_CS=3 -DEXTERNAL_FLASH_USE_SPI=SPI {build.usb_flags}
-sparkevo_timeshot2_native.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
-sparkevo_timeshot2_native.build.openocdscript=openocd_scripts/arduino_zero.cfg
-sparkevo_timeshot2_native.build.variant=arduino_zero
-sparkevo_timeshot2_native.build.variant_system_lib=
-sparkevo_timeshot2_native.build.vid=0x2341
-sparkevo_timeshot2_native.build.pid=0x804d
-sparkevo_timeshot2_native.bootloader.tool=openocd
-sparkevo_timeshot2_native.bootloader.tool.default=openocd
-sparkevo_timeshot2_native.bootloader.file=sparkevo_timeshot2/samd21_sam_ba_sparkevo_timeshot2.bin
+sparkevo_timeshot_native.upload.tool=bossac
+sparkevo_timeshot_native.upload.tool.default=bossac
+sparkevo_timeshot_native.upload.tool.network=arduino_ota
+sparkevo_timeshot_native.upload.protocol=sam-ba
+sparkevo_timeshot_native.upload.maximum_size=262144
+sparkevo_timeshot_native.upload.maximum_data_size=32768
+sparkevo_timeshot_native.upload.use_1200bps_touch=true
+sparkevo_timeshot_native.upload.wait_for_upload_port=true
+sparkevo_timeshot_native.upload.native_usb=true
+sparkevo_timeshot_native.build.mcu=cortex-m0plus
+sparkevo_timeshot_native.build.f_cpu=48000000L
+sparkevo_timeshot_native.build.usb_product="SparkEVO Time Shot"
+sparkevo_timeshot_native.build.usb_manufacturer="SparkEVO"
+sparkevo_timeshot_native.build.board=SAMD_ZERO
+sparkevo_timeshot_native.build.core=arduino
+sparkevo_timeshot_native.build.extra_flags=-D__SAMD21G18A__ -DEXTERNAL_FLASH_USE_CS=3 -DEXTERNAL_FLASH_USE_SPI=SPI {build.usb_flags}
+sparkevo_timeshot_native.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+sparkevo_timeshot_native.build.openocdscript=openocd_scripts/arduino_zero.cfg
+sparkevo_timeshot_native.build.variant=arduino_zero
+sparkevo_timeshot_native.build.variant_system_lib=
+# changed VID/PID (Generic USB-RS232 Device)
+sparkevo_timeshot_native.build.vid=0x04d8
+sparkevo_timeshot_native.build.pid=0x000a
+sparkevo_timeshot_native.bootloader.tool=openocd
+sparkevo_timeshot_native.bootloader.tool.default=openocd
+sparkevo_timeshot_native.bootloader.file=sparkevo_timeshot/samd21_sam_ba_sparkevo_timeshot.bin
 
 # Menu
-sparkevo_timeshot2_native.menu.opt.small=Small (-Os) 
-sparkevo_timeshot2_native.menu.opt.small.build.flags.optimize=-Os
-sparkevo_timeshot2_native.menu.opt.fast=Fast (-O2) (standard)
-sparkevo_timeshot2_native.menu.opt.fast.build.flags.optimize=-O2
-sparkevo_timeshot2_native.menu.opt.faster=Faster (-O3)
-sparkevo_timeshot2_native.menu.opt.faster.build.flags.optimize=-O3
+sparkevo_timeshot_native.menu.opt.small=Small (-Os) 
+sparkevo_timeshot_native.menu.opt.small.build.flags.optimize=-Os
+sparkevo_timeshot_native.menu.opt.fast=Fast (-O2) (standard)
+sparkevo_timeshot_native.menu.opt.fast.build.flags.optimize=-O2
+sparkevo_timeshot_native.menu.opt.faster=Faster (-O3)
+sparkevo_timeshot_native.menu.opt.faster.build.flags.optimize=-O3
