@@ -128,11 +128,15 @@ void analogReference(eAnalogReference mode)
 int analogRead(pin_size_t pin)
 {
   uint32_t valueRead = 0;
-
+/*
   if (pin < A0) {
     pin += A0;
   }
-
+  if (ulPin == 6) ulPin = PIN_A6;
+  if (ulPin == 7) ulPin = PIN_A7;
+  if (ulPin == 8) ulPin = PIN_A8;
+  if (ulPin == 9) ulPin = PIN_A9;
+*/
   pinPeripheral(pin, PIO_ANALOG);
 
   // Disable DAC, if analogWrite() was used previously to enable the DAC
