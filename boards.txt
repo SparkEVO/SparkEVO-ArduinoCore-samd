@@ -127,9 +127,9 @@ sparkevo_timeshot_native.bootloader.tool.default=openocd
 sparkevo_timeshot_native.bootloader.file=sparkevo_timeshot/samd21_sam_ba_sparkevo_timeshot.bin
 
 # Menu
-sparkevo_timeshot_native.menu.opt.small=Small (-Os) 
-sparkevo_timeshot_native.menu.opt.small.build.flags.optimize=-Os
 sparkevo_timeshot_native.menu.opt.fast=Fast (-O2) (standard)
 sparkevo_timeshot_native.menu.opt.fast.build.flags.optimize=-O2
 sparkevo_timeshot_native.menu.opt.faster=Faster (-O3)
 sparkevo_timeshot_native.menu.opt.faster.build.flags.optimize=-O3
+sparkevo_timeshot_native.menu.opt.small=Small (-Os) 
+sparkevo_timeshot_native.menu.opt.small.build.flags.optimize=-Os
