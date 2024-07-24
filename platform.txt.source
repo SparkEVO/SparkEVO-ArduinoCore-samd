@@ -60,6 +60,7 @@ compiler.readelf.cmd=arm-none-eabi-readelf
 
 # this can be overriden in boards.txt
 build.extra_flags=
+build.flags.optimize=-O2
 
 # These can be overridden in platform.local.txt
 compiler.c.extra_flags=
