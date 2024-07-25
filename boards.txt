@@ -122,4 +122,4 @@ sparkevo_timeshot_native.bootloader.file=sparkevo_timeshot/samd21_sam_ba_sparkev
 sparkevo_timeshot_native.menu.device.sensor=Sensor
 sparkevo_timeshot_native.menu.device.sensor.compiler.cpp.extra_flags=-DIN__DEVICE_SENSOR
 sparkevo_timeshot_native.menu.device.transponder=Transponder
-sparkevo_timeshot_native.menu.device.sensor.compiler.cpp.extra_flags=-DIN__DEVICE_TRANSPONDER
+sparkevo_timeshot_native.menu.device.transponder.compiler.cpp.extra_flags=-DIN__DEVICE_TRANSPONDER
