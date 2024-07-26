@@ -20,3 +20,7 @@
 	path = libraries/FlashStorage_SAMD
 	url = https://github.com/khoih-prog/FlashStorage_SAMD
 	branch = master
+[submodule "libraries/I2C_EEPROM"]
+	path = libraries/I2C_EEPROM
+	url = https://github.com/RobTillaart/I2C_EEPROM.git
+	branch = master
