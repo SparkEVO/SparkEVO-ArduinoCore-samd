@@ -10,7 +10,8 @@ typedef struct {
   uint8_t STRUCT_VERSION;
   uint8_t DEVICE_TYPE;
   int DEVICE_SERIAL_NUMBER;
-  int HW_REVISION;
+  uint8_t HW_REVISION;
+  unsigned int LICENSE_NUMBER;
 } __attribute__((packed)) Eeprom0Struct;
 
 inline Eeprom0Struct getDefaultEeprom0()
