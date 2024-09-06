@@ -24,3 +24,7 @@
 	path = libraries/I2C_EEPROM
 	url = https://github.com/RobTillaart/I2C_EEPROM.git
 	branch = master
+[submodule "libraries/RTCZero"]
+	path = libraries/RTCZero
+	url = https://github.com/arduino-libraries/RTCZero.git
+	branch = master
