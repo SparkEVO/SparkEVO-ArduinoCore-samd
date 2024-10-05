@@ -6,11 +6,14 @@
 #define EEPROM0_VERSION 1
 
 #define EEPROM_ADDR_EEPROM0 1
-#define EEPROM_ADDR_RADIOFREQUENCY 50  // 1 byte (0 = EU, 1 = US)
-#define EEPROM_ADDR_RADIOADDRESS 51    // 1 byte
-#define EEPROM_ADDR_MASTERADDRESS 52   // 1 byte
-#define EEPROM_ADDR_TIMESHOTMODE 53    // 1 byte
-#define EEPROM_ADDR_TRIGGERMODE 54     // 1 byte
+#define EEPROM_ADDR_RADIOFREQUENCY 50  			// 1 byte (0 = EU, 1 = US)
+#define EEPROM_ADDR_RADIOADDRESS 51    			// 1 byte
+#define EEPROM_ADDR_MASTERADDRESS 52   			// 1 byte
+#define EEPROM_ADDR_TIMESHOTMODE 53    			// 1 byte
+#define EEPROM_ADDR_TRIGGERMODE 54     			// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTMODE 55   	// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTDURATION 56	// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTSTATE 57   	// 1 byte
 
 typedef struct {
   uint8_t STRUCT_VERSION;
