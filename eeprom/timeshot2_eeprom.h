@@ -7,14 +7,15 @@
 
 // config
 #define EEPROM_ADDR_EEPROM0 1
-#define EEPROM_ADDR_RADIOFREQUENCY 10  			// 1 byte (0 = EU, 1 = US)
-#define EEPROM_ADDR_RADIOADDRESS 11    			// 1 byte
-#define EEPROM_ADDR_MASTERADDRESS 12   			// 1 byte
-#define EEPROM_ADDR_TIMESHOTMODE 13    			// 1 byte
-#define EEPROM_ADDR_TRIGGERMODE 14     			// 1 byte
-#define EEPROM_ADDR_TRANSPONDEROUTMODE 15   	// 1 byte
-#define EEPROM_ADDR_TRANSPONDEROUTDURATION 16	// 1 byte
-#define EEPROM_ADDR_TRANSPONDEROUTINVERTED 17  	// 1 byte
+#define EEPROM_ADDR_RADIOFREQUENCYID 20  		// 1 byte (0 = EU, 1 = US)
+#define EEPROM_ADDR_RADIOFREQUENCYOFFSET 21 	// 1 byte (0-127 => [-128;0], 128-255 => [1;+128])
+#define EEPROM_ADDR_RADIOADDRESS 22    			// 1 byte
+#define EEPROM_ADDR_MASTERADDRESS 23   			// 1 byte
+#define EEPROM_ADDR_TIMESHOTMODE 24   			// 1 byte
+#define EEPROM_ADDR_TRIGGERMODE 25     			// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTMODE 26   	// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTDURATION 27	// 1 byte
+#define EEPROM_ADDR_TRANSPONDEROUTINVERTED 28  	// 1 byte
 
 // stats
 #define EEPROM_ADDR_RECORDSARRAY 50  			// sequence of 4 bytes
