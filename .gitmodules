@@ -28,3 +28,7 @@
 	path = libraries/RTCZero
 	url = https://github.com/arduino-libraries/RTCZero.git
 	branch = master
+[submodule "libraries/Base64"]
+	path = libraries/Base64
+	url = https://github.com/Xander-Electronics/Base64.git
+	branch = master
