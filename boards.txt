@@ -59,6 +59,7 @@ sparkevo_itronix_native.build.ldscript=linker_scripts/gcc/flash_with_bootloader.
 sparkevo_itronix_native.build.openocdscript=openocd_scripts/arduino_zero.cfg
 sparkevo_itronix_native.build.variant=arduino_zero
 sparkevo_itronix_native.build.variant_system_lib=
+sparkevo_itronix_native.build.project_variant=
 # changed VID/PID (Generic USB-RS232 Device)
 sparkevo_itronix_native.build.vid=0x04d8
 sparkevo_itronix_native.build.pid=0x000a
@@ -121,5 +122,7 @@ sparkevo_timeshot_native.bootloader.file=sparkevo_timeshot/samd21_sam_ba_sparkev
 # Menu
 sparkevo_timeshot_native.menu.device.sensor=Sensor
 sparkevo_timeshot_native.menu.device.sensor.compiler.cpp.extra_flags=-DIN__DEVICE_SENSOR
+sparkevo_timeshot_native.menu.device.sensor.build.project_variant=.sensor
 sparkevo_timeshot_native.menu.device.transponder=Transponder
 sparkevo_timeshot_native.menu.device.transponder.compiler.cpp.extra_flags=-DIN__DEVICE_TRANSPONDER
+sparkevo_timeshot_native.menu.device.transponder.build.project_variant=.transponder

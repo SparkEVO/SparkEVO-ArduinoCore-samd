@@ -105,7 +105,7 @@ recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compil
 recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}"  "-L{build.path}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-T{build.variant.path}/{build.ldscript}" "-Wl,-Map,{build.path}/{build.project_name}.map" --specs=nano.specs --specs=nosys.specs {compiler.ldflags} -o "{build.path}/{build.project_name}.elf" {object_files} {compiler.libraries.ldflags} -Wl,--start-group {compiler.arm.cmsis.ldflags} -lm "{build.path}/{archive_file}" -Wl,--end-group
 
 ## Create output (bin file)
-recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.bin.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
+recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.bin.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}{build.project_variant}.bin"
 
 ## Create output (hex file)
 recipe.objcopy.hex.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.hex"
@@ -160,7 +160,7 @@ tools.avrdude_remote.upload.pattern="openocd --version 2>&1 | grep 2016 && if op
 # The following rule is deprecated by pluggable discovery.
 # We keep it to avoid breaking compatibility with the Arduino Java IDE.
 tools.avrdude.network_cmd={runtime.tools.arduinoOTA.path}/bin/arduinoOTA
-tools.avrdude.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}.bin" -upload /sketch -b
+tools.avrdude.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}{build.project_variant}.bin" -upload /sketch -b
 
 #
 # BOSSA
@@ -171,14 +171,14 @@ tools.bossac.cmd.windows=bossac.exe
 
 tools.bossac.upload.params.verbose=-i -d
 tools.bossac.upload.params.quiet=
-tools.bossac.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -U {upload.native_usb} -i -e -w -v "{build.path}/{build.project_name}.bin" -R
+tools.bossac.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -U {upload.native_usb} -i -e -w -v "{build.path}/{build.project_name}{build.project_variant}.bin" -R
 
 tools.bossac_remote.upload.pattern=/usr/bin/run-bossac {upload.verbose} --port=ttyATH0 -U {upload.native_usb} -e -w -v /tmp/sketch.bin -R
 
 # The following rule is deprecated by pluggable discovery.
 # We keep it to avoid breaking compatibility with the Arduino Java IDE.
 tools.bossac.network_cmd={runtime.tools.arduinoOTA.path}/bin/arduinoOTA
-tools.bossac.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}.bin" -upload /sketch -b {arduinoota.extraflags}
+tools.bossac.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}{build.project_variant}.bin" -upload /sketch -b {arduinoota.extraflags}
 
 #
 # BOSSA (ignore binary size)
@@ -189,14 +189,14 @@ tools.bossacI.cmd.windows=bossac.exe
 
 tools.bossacI.upload.params.verbose=-i -d
 tools.bossacI.upload.params.quiet=
-tools.bossacI.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -I -U {upload.native_usb} -i -e -w "{build.path}/{build.project_name}.bin" -R
+tools.bossacI.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -I -U {upload.native_usb} -i -e -w "{build.path}/{build.project_name}{build.project_variant}.bin" -R
 
 tools.bossacI_remote.upload.pattern=/usr/bin/run-bossac {upload.verbose} --port=ttyATH0 -U {upload.native_usb} -e -w -v /tmp/sketch.bin -R
 
 # The following rule is deprecated by pluggable discovery.
 # We keep it to avoid breaking compatibility with the Arduino Java IDE.
 tools.bossacI.network_cmd={runtime.tools.arduinoOTA.path}/bin/arduinoOTA
-tools.bossacI.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}.bin" -upload /sketch -b
+tools.bossacI.upload.network_pattern="{network_cmd}" -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}{build.project_variant}.bin" -upload /sketch -b
 
 
 #
@@ -209,12 +209,12 @@ tools.openocd.cmd.windows=bin/openocd.exe
 
 tools.openocd.upload.params.verbose=-d2
 tools.openocd.upload.params.quiet=-d0
-tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{runtime.platform.path}/variants/{build.variant}/{build.openocdscript}" -c "telnet_port disabled; program {{build.path}/{build.project_name}.bin} verify reset 0x2000; shutdown"
+tools.openocd.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{runtime.platform.path}/variants/{build.variant}/{build.openocdscript}" -c "telnet_port disabled; program {{build.path}/{build.project_name}{build.project_variant}.bin} verify reset 0x2000; shutdown"
 
 # The following rule is deprecated by pluggable discovery.
 # We keep it to avoid breaking compatibility with the Arduino Java IDE.
 tools.openocd.network_cmd={runtime.tools.arduinoOTA.path}/bin/arduinoOTA
-tools.openocd.upload.network_pattern={network_cmd} -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}.bin" -upload /sketch -b
+tools.openocd.upload.network_pattern={network_cmd} -address {serial.port} -port 65280 -username arduino -password "{network.password}" -sketch "{build.path}/{build.project_name}{build.project_variant}.bin" -upload /sketch -b
 
 tools.openocd.program.params.verbose=-d2
 tools.openocd.program.params.quiet=-d0
@@ -239,7 +239,7 @@ tools.openocd-withbootsize.cmd.windows=bin/openocd.exe
 
 tools.openocd-withbootsize.upload.params.verbose=-d2
 tools.openocd-withbootsize.upload.params.quiet=-d0
-tools.openocd-withbootsize.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{runtime.platform.path}/variants/{build.variant}/{build.openocdscript}" -c "telnet_port disabled; program {{build.path}/{build.project_name}.bin} verify reset {bootloader.size}; shutdown"
+tools.openocd-withbootsize.upload.pattern="{path}/{cmd}" {upload.verbose} -s "{path}/share/openocd/scripts/" -f "{runtime.platform.path}/variants/{build.variant}/{build.openocdscript}" -c "telnet_port disabled; program {{build.path}/{build.project_name}{build.project_variant}.bin} verify reset {bootloader.size}; shutdown"
 
 # Program flashes the binary at 0x0000, so use the linker script without_bootloader
 tools.openocd-withbootsize.program.params.verbose=-d2
@@ -261,4 +261,4 @@ arduinoota.extraflags=
 tools.arduino_ota.cmd={runtime.tools.arduinoOTA.path}/bin/arduinoOTA
 tools.arduino_ota.upload.field.password=Password
 tools.arduino_ota.upload.field.password.secret=true
-tools.arduino_ota.upload.pattern="{cmd}" -address "{upload.port.address}" -port 65280 -username arduino -password "{upload.field.password}" -sketch "{build.path}/{build.project_name}.bin" -upload /sketch -b {arduinoota.extraflags}
+tools.arduino_ota.upload.pattern="{cmd}" -address "{upload.port.address}" -port 65280 -username arduino -password "{upload.field.password}" -sketch "{build.path}/{build.project_name}{build.project_variant}.bin" -upload /sketch -b {arduinoota.extraflags}
