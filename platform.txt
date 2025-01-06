@@ -20,7 +20,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
 name=SparkEVO SAMD Boards
-version=1.5.9
+version=1.5.11
 
 # Compile variables
 # -----------------
@@ -108,7 +108,7 @@ recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}"  "-L{build.path}"
 recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.bin.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}{build.project_variant}.bin"
 
 ## Create output (hex file)
-recipe.objcopy.hex.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.hex"
+recipe.objcopy.hex.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}{build.project_variant}.hex"
 
 build.preferred_out_format=bin
 
@@ -153,7 +153,7 @@ tools.avrdude.config.path={path}/etc/avrdude.conf
 tools.avrdude.upload.params.verbose=-v -v
 tools.avrdude.upload.params.quiet=-q -q
 tools.avrdude.upload.params.noverify=-V
-tools.avrdude.upload.pattern="{cmd}" "-C{config.path}" {upload.verbose} -p{build.emu.mcu} -c{upload.protocol} -P{serial.port} -b{upload.speed} "-Uflash:w:{build.path}/{build.project_name}.hex:i"
+tools.avrdude.upload.pattern="{cmd}" "-C{config.path}" {upload.verbose} -p{build.emu.mcu} -c{upload.protocol} -P{serial.port} -b{upload.speed} "-Uflash:w:{build.path}/{build.project_name}{build.project_variant}.hex:i"
 
 tools.avrdude_remote.upload.pattern="openocd --version 2>&1 | grep 2016 && if opkg update; then opkg upgrade openocd; exit 1; else echo 'Please connect your board to the Internet in order to upgrade tools' >&2; exit 1; fi || /usr/bin/run-avrdude /tmp/sketch.hex"
 
@@ -218,7 +218,7 @@ tools.openocd.upload.network_pattern={network_cmd} -address {serial.port} -port 
 
 tools.openocd.program.params.verbose=-d2
 tools.openocd.program.params.quiet=-d0
-tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/share/openocd/scripts/" -f "interface/{protocol}" -c "set telnet_port 0" {extra_params} -f "target/at91samdXX.cfg" -c "telnet_port disabled; program {{build.path}/{build.project_name}.hex} verify reset; shutdown"
+tools.openocd.program.pattern="{path}/{cmd}" {program.verbose} -s "{path}/share/openocd/scripts/" -f "interface/{protocol}" -c "set telnet_port 0" {extra_params} -f "target/at91samdXX.cfg" -c "telnet_port disabled; program {{build.path}/{build.project_name}{build.project_variant}.hex} verify reset; shutdown"
 
 tools.openocd.erase.params.verbose=-d3
 tools.openocd.erase.params.quiet=-d0
