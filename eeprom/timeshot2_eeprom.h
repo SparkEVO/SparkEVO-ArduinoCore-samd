@@ -20,8 +20,9 @@
 #define EEPROM_ADDR_OUTPUTSIGNALINVERTED 30		// 1 byte
 
 // stats
-#define EEPROM_ADDR_RECORDSARRAY 50  			// sequence of 4 bytes
-#define EEPROM_LENGTH_RECORDSARRAY 50			// length of RECORDSARRAY
+#define EEPROM_ADDR_RECORDSARRAY 40				// sequence of [EEPROM_SIZE_RECORD] bytes
+#define EEPROM_SIZE_RECORD 6					// 6 bytes: Sensor Address (1 Byte), Transponder Address (1 Byte), Measured time (4 Bytes)
+#define EEPROM_LENGTH_RECORDSARRAY 60			// length of RECORDSARRAY
 
 typedef struct {
   uint8_t STRUCT_VERSION;
