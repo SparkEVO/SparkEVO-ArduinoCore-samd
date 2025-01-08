@@ -32,3 +32,7 @@
 	path = libraries/Base64
 	url = https://github.com/Xander-Electronics/Base64.git
 	branch = master
+[submodule "libraries/CRC32"]
+	path = libraries/CRC32
+	url = https://github.com/bakercp/CRC32.git
+	branch = master

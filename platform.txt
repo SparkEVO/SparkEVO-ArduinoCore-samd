@@ -20,7 +20,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
 name=SparkEVO SAMD Boards
-version=1.5.11
+version=1.5.13
 
 # Compile variables
 # -----------------
