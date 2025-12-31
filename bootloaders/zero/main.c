@@ -89,20 +89,20 @@ static void check_start_application(void)
     /* Stay in bootloader */
     return;
   }
-
+/*
 #if defined(BOOT_DOUBLE_TAP_ADDRESS)
   #define DOUBLE_TAP_MAGIC 0x07738135
   if (PM->RCAUSE.bit.POR)
   {
     /* On power-on initialize double-tap */
-    BOOT_DOUBLE_TAP_DATA = 0;
+/*    BOOT_DOUBLE_TAP_DATA = 0;
   }
   else
   {
     if (BOOT_DOUBLE_TAP_DATA == DOUBLE_TAP_MAGIC)
     {
       /* Second tap, stay in bootloader */
-      BOOT_DOUBLE_TAP_DATA = 0;
+ /*     BOOT_DOUBLE_TAP_DATA = 0;
       return;
     }
 
@@ -113,21 +113,21 @@ static void check_start_application(void)
 
     for (uint32_t i=0; i<2500; i++) /* 10ms */
       /* force compiler to not optimize this... */
-      __asm__ __volatile__("");
+/*      __asm__ __volatile__("");
 #endif
 
     /* First tap */
-    BOOT_DOUBLE_TAP_DATA = DOUBLE_TAP_MAGIC;
+/*    BOOT_DOUBLE_TAP_DATA = DOUBLE_TAP_MAGIC;
 
     /* Wait 0.5sec to see if the user tap reset again.
      * The loop value is based on SAMD21 default 1MHz clock @ reset.
      */
-    for (uint32_t i=0; i<125000; i++) /* 500ms */
+/*    for (uint32_t i=0; i<125000; i++) /* 500ms */
       /* force compiler to not optimize this... */
-      __asm__ __volatile__("");
+/*      __asm__ __volatile__("");
 
     /* Timeout happened, continue boot... */
-    BOOT_DOUBLE_TAP_DATA = 0;
+/*    BOOT_DOUBLE_TAP_DATA = 0;
   }
 #endif
 

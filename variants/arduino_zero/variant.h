@@ -117,8 +117,8 @@ static const uint8_t DAC0 = PIN_DAC0;
 #define ADC_RESOLUTION		12
 
 // Other pins
-#define PIN_ATN              (38ul)
-static const uint8_t ATN = PIN_ATN;
+//#define PIN_ATN              (38ul)
+//static const uint8_t ATN = PIN_ATN;
 
 /*
  * Serial interfaces
@@ -168,7 +168,7 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 /*
  * USB
  */
-#define PIN_USB_HOST_ENABLE (27ul)
+//#define PIN_USB_HOST_ENABLE (27ul)
 #define PIN_USB_DM          (28ul)
 #define PIN_USB_DP          (29ul)
 
