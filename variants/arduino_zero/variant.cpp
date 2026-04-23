@@ -213,6 +213,10 @@ const PinDescription g_APinDescription[]=
   // 44..45 - SERCOM2
 //  { PORTA, 14, PIO_SERCOM, (PIN_ATTR_DIGITAL), No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NONE }, // SERCOM2/PAD[2]
 //  { PORTA, 15, PIO_SERCOM, (PIN_ATTR_DIGITAL), No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NONE }, // SERCOM2/PAD[3]
+
+	// Aggiungi questa riga per PA01
+  { PORTA,  1, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_1 }  // 46: Il tuo nuovo Pin
+
 } ;
 
 extern "C" {

@@ -75,7 +75,8 @@ void SystemInit( void )
    */
   // !!!!! EDITED: changed from 0x2u to 0x1u to reduce startup by -50ms
   SYSCTRL->XOSC32K.reg = SYSCTRL_XOSC32K_STARTUP( 0x1u ) | /* cf table 15.10 of product datasheet in chapter 15.8.6 */
-                         SYSCTRL_XOSC32K_XTALEN | SYSCTRL_XOSC32K_EN32K ;
+                         //SYSCTRL_XOSC32K_XTALEN |  EDITED: to free the PA01 pin
+						 SYSCTRL_XOSC32K_EN32K ;
   SYSCTRL->XOSC32K.bit.ENABLE = 1 ; /* separate call, as described in chapter 15.6.3 */
 
   while ( (SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_XOSC32KRDY) == 0 )
