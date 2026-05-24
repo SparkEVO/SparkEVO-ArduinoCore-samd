@@ -3,9 +3,6 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define EEPROM0_STRUCTVERSION 1
-#define FEATURES_STRUCTVERSION 1
-
 #define DEVICE_TYPE_ITRONIX 4
 #define DEVICE_TYPE_ITRONIX_IGNITION 5
 #define DEVICE_TYPE_ITRONIX_ECU 6
@@ -19,25 +16,36 @@
 #define PARTNERID_CRE 1
 #define PARTNERID_RAPPA 2
 
+
+typedef struct {
+  bool VALID = false;
+  uint8_t DEVICE_TYPE = 0;
+  int DEVICE_SERIAL_NUMBER = 0;
+  int HW_REVISION = 0;
+  unsigned int LICENSE_CODE = 0;
+} Eeprom0Struct;
+
+#define EEPROM0_PARAM(id, field) { id, sizeof(Eeprom0Struct::field), (uint16_t)offsetof(Eeprom0Struct, field) }
+
+static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
+  FEATURES_PARAM(1, VALID),
+  FEATURES_PARAM(2, DEVICE_TYPE),
+  FEATURES_PARAM(3, DEVICE_SERIAL_NUMBER),
+  FEATURES_PARAM(4, HW_REVISION),
+  FEATURES_PARAM(5, LICENSE_CODE)
+};
+
+static const uint8_t EEPROM0_PARAMS_COUNT = sizeof(EEPROM0_PARAMS_TABLE) / sizeof(EEPROM0_PARAMS_TABLE[0]);
+
 typedef struct {
   uint8_t STRUCT_VERSION;
   uint8_t DEVICE_TYPE;
   int DEVICE_SERIAL_NUMBER;
   int HW_REVISION;
   unsigned int LICENSE_CODE;
-} __attribute__((packed)) Eeprom0Struct;
+} __attribute__((packed)) Eeprom0LegacyStruct;
 
-inline Eeprom0Struct getDefaultEeprom0()
-{
-  Eeprom0Struct eeprom0;
-  eeprom0.STRUCT_VERSION = EEPROM0_STRUCTVERSION;
-  eeprom0.DEVICE_TYPE = 0;
-  eeprom0.DEVICE_SERIAL_NUMBER = 0;
-  eeprom0.HW_REVISION = 0;
-  eeprom0.LICENSE_CODE = 0;
-  
-  return eeprom0;
-}
+
 
 typedef enum {
   MULTIPRP_FUNC_QUICKSHIFT_D = 0,  // Digital Quick Shift
@@ -47,70 +55,152 @@ typedef enum {
 } MultiPurposeFunctionType;
 
 typedef struct {
+  bool VALID = false;
+  unsigned short PARTNER_ID = 0;
+  unsigned short VARIANT_ID = 0;
+  uint8_t ENABLE_MODE = 0; // 0 = needs pin to enable, 1 = never available 
+  bool ENABLE_BLE = true; // Use BLE connection
+  bool ENABLE_CONFIG_W = true; // Edit of Configuration
+  bool ENABLE_FWUPGRADE = true; // Possibility to upgrade the FW by user
+  uint8_t TIMINGMAPS_COUNT = 4; // Number of Timing Maps
+  bool ENABLE_BASETIMING_CONFIG_W = true; // Edit of Base Timing
+  uint8_t ENABLED_TIMINGMAPS_R = UINT8_MAX; // View/Load Timing Maps and Rev Limiter
+  uint8_t ENABLED_TIMINGMAPS_W = UINT8_MAX; // Edit Timing Maps and Rev Limiter
+  bool ENABLE_MAPSWITCH = true; // Map Switch
+  bool ENABLE_MAPSWITCH_CONFIG_W = true; // Edit of Map Switch
+  bool ENABLE_LAUNCHCTRL = true; // Launch Control
+  bool ENABLE_LAUNCHCTRL_CONFIG_W = true; // Edit of Launch Control
+  bool ENABLE_MAPJUMP = true; // Map Jump
+  bool ENABLE_MAPJUMP_CONFIG_W = true; // Edit of Map Jump
+  
+  // actuators
+  bool ENABLE_QUICKSHIFT = true; // Quick Shift
+  bool ENABLE_QUICKSHIFT_CONFIG_W = true; // Edit of Quick Shift
+  bool ENABLE_WATERPUMP = true; // Water Pump
+  bool ENABLE_WATERPUMP_CONFIG_W = true; // Edit of Water Pump
+  bool ENABLE_POWERVALVE = true; // Enable powervalve
+  uint8_t POWERVALVEMAPS_COUNT = 2; // Number of Powervalve Maps
+  uint8_t ENABLED_POWERVALVEMAPS_R = UINT8_MAX; // View/Load Power Valve Maps (1 bit for each map)
+  uint8_t ENABLED_POWERVALVEMAPS_W = UINT8_MAX; // Edit of Power Valve Maps (1 bit for each map)
+  bool ENABLE_POWERJET = true; // Enable powerjet
+  uint8_t POWERJETMAPS_COUNT = 1; // Number of Powerjet Maps
+  uint8_t ENABLED_POWERJETMAPS_R = UINT8_MAX; // View/Load Injector Maps (1 bit for each map)
+  uint8_t ENABLED_POWERJETMAPS_W = UINT8_MAX; // Edit Injector Maps (1 bit for each map)
+  bool ENABLE_INJECTOR = true; // Enable injector
+  uint8_t INJECTORMAPS_COUNT = 1; // Number of Injector Maps
+  uint8_t ENABLED_INJECTORMAPS_R = UINT8_MAX; // View/Load Injector Maps (1 bit for each map)
+  uint8_t ENABLED_INJECTORMAPS_W = UINT8_MAX; // Edit Injector Maps (1 bit for each map)
+  
+  // outputs
+  bool ENABLE_SHIFTLIGHT = true; // Enable Shift Light
+  bool ENABLE_SHIFTLIGHT_CONFIG_W = true; // Edit of Shift Light
+  bool ENABLE_KNOCKINDICATOR = true; // Enable Knock indicator
+  bool ENABLE_KNOCKINDICATOR_CONFIG_W = true; // Edit of Knock indicator
+  bool ENABLE_TACHOUT = true; // Enable Tach Output
+  bool ENABLE_TACHOUT_CONFIG_W = true; // Edit of Tach Output
+  
+  // sensors TODO
+  bool ENABLE_SENSOR_EGT = true;
+  bool ENABLE_SENSOR_EGT_CONFIG_W = true;
+  bool ENABLE_SENSOR_THERMO = true
+  bool ENABLE_SENSOR_THERMO_CONFIG_W = true;
+  bool ENABLE_SENSOR_AIRPRESSURE = true;
+  bool ENABLE_SENSOR_AIRPRESSURE_CONFIG_W = true;
+  bool ENABLE_SENSOR_KNOCK = true;
+  bool ENABLE_SENSOR_KNOCK_CONFIG_W = true;
+  
+  bool ENABLE_LOGGER = true; // Datalogger
+  bool ENABLE_RUNTIMERESET = true; // Possibility to reset Runtime
+  
+  // custom settings
+  uint8_t POWERVALVE_MAX_APERTURE_PERCENT = 100; 
+} FeaturesStruct;
+
+#define FEATURES_PARAM(id, field) { id, sizeof(FeaturesStruct::field), (uint16_t)offsetof(CountersStruct, field) }
+
+static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
+  FEATURES_PARAM(1, VALID),
+  FEATURES_PARAM(2, PARTNER_ID),
+  FEATURES_PARAM(3, VARIANT_ID),
+  FEATURES_PARAM(4, ENABLE_MODE),
+  FEATURES_PARAM(5, ENABLE_BLE),
+  FEATURES_PARAM(6, ENABLE_CONFIG_W),
+  FEATURES_PARAM(7, ENABLE_FWUPGRADE),
+  FEATURES_PARAM(8, TIMINGMAPS_COUNT),
+  FEATURES_PARAM(9, ENABLE_BASETIMING_CONFIG_W),
+  FEATURES_PARAM(10, ENABLED_TIMINGMAPS_R),
+  FEATURES_PARAM(11, ENABLED_TIMINGMAPS_W),
+  FEATURES_PARAM(12, ENABLE_MAPSWITCH),
+  FEATURES_PARAM(13, ENABLE_MAPSWITCH_CONFIG_W),
+  FEATURES_PARAM(14, ENABLE_LAUNCHCTRL),
+  FEATURES_PARAM(15, ENABLE_LAUNCHCTRL_CONFIG_W),
+  FEATURES_PARAM(16, ENABLE_MAPJUMP),
+  FEATURES_PARAM(17, ENABLE_MAPJUMP_CONFIG_W),
+  FEATURES_PARAM(18, ENABLE_QUICKSHIFT),
+  FEATURES_PARAM(19, ENABLE_QUICKSHIFT_CONFIG_W),
+  FEATURES_PARAM(20, ENABLE_WATERPUMP),
+  FEATURES_PARAM(21, ENABLE_WATERPUMP_CONFIG_W),
+  FEATURES_PARAM(22, ENABLE_POWERVALVE),
+  FEATURES_PARAM(23, POWERVALVEMAPS_COUNT),
+  FEATURES_PARAM(24, ENABLED_POWERVALVEMAPS_R),
+  FEATURES_PARAM(25, ENABLED_POWERVALVEMAPS_W),
+  FEATURES_PARAM(26, ENABLE_POWERJET),
+  FEATURES_PARAM(27, POWERJETMAPS_COUNT),
+  FEATURES_PARAM(28, ENABLED_POWERJETMAPS_R),
+  FEATURES_PARAM(29, ENABLED_POWERJETMAPS_W),
+  FEATURES_PARAM(30, ENABLE_INJECTOR),
+  FEATURES_PARAM(31, INJECTORMAPS_COUNT),
+  FEATURES_PARAM(32, ENABLED_INJECTORMAPS_R),
+  FEATURES_PARAM(33, ENABLED_INJECTORMAPS_W),
+  FEATURES_PARAM(34, ENABLE_SHIFTLIGHT),
+  FEATURES_PARAM(35, ENABLE_SHIFTLIGHT_CONFIG_W),
+  FEATURES_PARAM(36, ENABLE_KNOCKINDICATOR),
+  FEATURES_PARAM(37, ENABLE_KNOCKINDICATOR_CONFIG_W),
+  FEATURES_PARAM(38, ENABLE_TACHOUT),
+  FEATURES_PARAM(39, ENABLE_TACHOUT_CONFIG_W),
+  FEATURES_PARAM(40, ENABLE_SENSOR_EGT),
+  FEATURES_PARAM(41, ENABLE_SENSOR_EGT_CONFIG_W),
+  FEATURES_PARAM(42, ENABLE_SENSOR_THERMO),
+  FEATURES_PARAM(43, ENABLE_SENSOR_THERMO_CONFIG_W),
+  FEATURES_PARAM(44, ENABLE_SENSOR_AIRPRESSURE),
+  FEATURES_PARAM(45, ENABLE_SENSOR_AIRPRESSURE_CONFIG_W),
+  FEATURES_PARAM(46, ENABLE_SENSOR_KNOCK),
+  FEATURES_PARAM(47, ENABLE_SENSOR_KNOCK_CONFIG_W),
+  FEATURES_PARAM(48, ENABLE_LOGGER),
+  FEATURES_PARAM(49, ENABLE_RUNTIMERESET),
+  FEATURES_PARAM(50, POWERVALVE_MAX_APERTURE_PERCENT)  
+};
+
+static const uint8_t FEATURES_PARAMS_COUNT = sizeof(FEATURES_PARAMS_TABLE) / sizeof(FEATURES_PARAMS_TABLE[0]);
+
+typedef struct {
   uint8_t STRUCT_VERSION;
   unsigned short PARTNER_ID;
   unsigned short VARIANT_ID;
-  uint8_t ENABLE_MODE; // 0 = needs pin to enable, 1 = never available 
-  bool ENABLE_BLE; // Use BLE connection
-  bool ENABLE_CONFIG_W; // Edit of Configuration
-  uint8_t TIMINGMAPS_COUNT; // Number of Timing Maps
-  uint8_t ENABLED_TIMINGMAPS_R; // View/Load Timing Maps and Rev Limiter and Base Timing (1 bit for each map)
-  uint8_t ENABLED_TIMINGMAPS_W; // Edit Timing Maps and Rev Limiter and Base Timing (1 bit for each map)
-  bool ENABLE_INJECTOR; // Enable injector
-  uint8_t INJECTORMAPS_COUNT; // Number of Injector Maps
-  uint8_t ENABLED_INJECTORMAPS_R; // View/Load Injector Maps (1 bit for each map)
-  uint8_t ENABLED_INJECTORMAPS_W; // Edit Injector Maps (1 bit for each map)
-  bool ENABLE_POWERJET; // Enable powerjet
-  uint8_t POWERJETMAPS_COUNT; // Number of Powerjet Maps
-  uint8_t ENABLED_POWERJETMAPS_R; // View/Load Injector Maps (1 bit for each map)
-  uint8_t ENABLED_POWERJETMAPS_W; // Edit Injector Maps (1 bit for each map)
-  bool ENABLE_POWERVALVE; // Enable powervalve
-  uint8_t POWERVALVEMAPS_COUNT; // Number of Powervalve Maps
-  uint8_t ENABLED_POWERVALVEMAPS_R; // View/Load Power Valve Maps (1 bit for each map)
-  uint8_t ENABLED_POWERVALVEMAPS_W; // Edit of Power Valve Maps (1 bit for each map)
-  bool ENABLE_MULTIPRP; // Configure the Multi Purpose pin
-  bool ENABLE_QUICKSHIFT; // Quick Shift
-  bool ENABLE_MAPSWITCH; // Map Switch
-  bool ENABLE_MAPJUMP; // Map Jump
-  bool ENABLE_LOGGER; // Datalogger
-  bool ENABLE_RUNTIMERESET; // Possibility to reset Runtime
-  // custom settings
+  uint8_t ENABLE_MODE;
+  bool ENABLE_BLE;
+  bool ENABLE_CONFIG_W;
+  uint8_t TIMINGMAPS_COUNT;
+  uint8_t ENABLED_TIMINGMAPS_R;
+  uint8_t ENABLED_TIMINGMAPS_W;
+  bool ENABLE_INJECTOR;
+  uint8_t INJECTORMAPS_COUNT;
+  uint8_t ENABLED_INJECTORMAPS_R;
+  uint8_t ENABLED_INJECTORMAPS_W;
+  bool ENABLE_POWERJET;
+  uint8_t POWERJETMAPS_COUNT;
+  uint8_t ENABLED_POWERJETMAPS_R;
+  uint8_t ENABLED_POWERJETMAPS_W;
+  bool ENABLE_POWERVALVE;
+  uint8_t POWERVALVEMAPS_COUNT;
+  uint8_t ENABLED_POWERVALVEMAPS_R;
+  uint8_t ENABLED_POWERVALVEMAPS_W;
+  bool ENABLE_MULTIPRP;
+  bool ENABLE_QUICKSHIFT;
+  bool ENABLE_MAPSWITCH;
+  bool ENABLE_MAPJUMP;
+  bool ENABLE_LOGGER;
+  bool ENABLE_RUNTIMERESET;
   uint8_t POWERVALVE_MAX_APERTURE_PERCENT; 
   MultiPurposeFunctionType MULTIPRP_DEFAULT_TYPE;
-} __attribute__((packed)) FeaturesStruct;
-
-inline FeaturesStruct getDefaultFeatures()
-{
-  FeaturesStruct features;
-  features.STRUCT_VERSION = FEATURES_STRUCTVERSION;
-  features.PARTNER_ID = 0;
-  features.VARIANT_ID = 0;
-  features.ENABLE_MODE = 0;
-  features.ENABLE_BLE = true;
-  features.ENABLE_CONFIG_W = true;
-  features.TIMINGMAPS_COUNT = 4;
-  features.ENABLED_TIMINGMAPS_R = UINT8_MAX;
-  features.ENABLED_TIMINGMAPS_W = UINT8_MAX;
-  features.ENABLE_INJECTOR = true;
-  features.INJECTORMAPS_COUNT = 1;
-  features.ENABLED_INJECTORMAPS_R = UINT8_MAX;
-  features.ENABLED_INJECTORMAPS_W = UINT8_MAX;
-  features.ENABLE_POWERJET = true;
-  features.POWERJETMAPS_COUNT = 1;
-  features.ENABLED_POWERJETMAPS_R = UINT8_MAX;
-  features.ENABLED_POWERJETMAPS_W = UINT8_MAX;
-  features.ENABLE_POWERVALVE = true;
-  features.POWERVALVEMAPS_COUNT = 2;
-  features.ENABLED_POWERVALVEMAPS_R = UINT8_MAX;
-  features.ENABLED_POWERVALVEMAPS_W = UINT8_MAX;
-  features.ENABLE_MULTIPRP = true;
-  features.ENABLE_QUICKSHIFT = true;
-  features.ENABLE_MAPSWITCH = true;
-  features.ENABLE_MAPJUMP = true;
-  features.ENABLE_LOGGER = true;
-  features.ENABLE_RUNTIMERESET = true;
-  features.POWERVALVE_MAX_APERTURE_PERCENT = 100;
-  features.MULTIPRP_DEFAULT_TYPE = MULTIPRP_FUNC_QUICKSHIFT_D;
-  
-  return features;
-}
+} __attribute__((packed)) FeaturesLegacyStruct;
