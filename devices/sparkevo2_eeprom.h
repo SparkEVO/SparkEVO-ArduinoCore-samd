@@ -16,6 +16,17 @@
 #define PARTNERID_CRE 1
 #define PARTNERID_RAPPA 2
 
+struct MemoryRecord {
+  uint8_t id;
+  uint8_t size;
+  uint8_t data[4];
+};
+
+struct MemoryParamDescriptor {
+  uint8_t id;
+  uint8_t size;
+  uint16_t offset;
+};
 
 typedef struct {
   bool VALID = false;
@@ -27,13 +38,14 @@ typedef struct {
 
 #define EEPROM0_PARAM(id, field) { id, sizeof(Eeprom0Struct::field), (uint16_t)offsetof(Eeprom0Struct, field) }
 
-static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
-  FEATURES_PARAM(1, VALID),
-  FEATURES_PARAM(2, DEVICE_TYPE),
-  FEATURES_PARAM(3, DEVICE_SERIAL_NUMBER),
-  FEATURES_PARAM(4, HW_REVISION),
-  FEATURES_PARAM(5, LICENSE_CODE)
+static const MemoryParamDescriptor EEPROM0_PARAMS_TABLE[] = {
+  EEPROM0_PARAM(1, VALID),
+  EEPROM0_PARAM(2, DEVICE_TYPE),
+  EEPROM0_PARAM(3, DEVICE_SERIAL_NUMBER),
+  EEPROM0_PARAM(4, HW_REVISION),
+  EEPROM0_PARAM(5, LICENSE_CODE)
 };
+#define EEPROM0_PARAM_MAXID 5
 
 static const uint8_t EEPROM0_PARAMS_COUNT = sizeof(EEPROM0_PARAMS_TABLE) / sizeof(EEPROM0_PARAMS_TABLE[0]);
 
@@ -44,8 +56,6 @@ typedef struct {
   int HW_REVISION;
   unsigned int LICENSE_CODE;
 } __attribute__((packed)) Eeprom0LegacyStruct;
-
-
 
 typedef enum {
   MULTIPRP_FUNC_QUICKSHIFT_D = 0,  // Digital Quick Shift
@@ -79,7 +89,7 @@ typedef struct {
   bool ENABLE_WATERPUMP = true; // Water Pump
   bool ENABLE_WATERPUMP_CONFIG_W = true; // Edit of Water Pump
   bool ENABLE_POWERVALVE = true; // Enable powervalve
-  uint8_t POWERVALVEMAPS_COUNT = 2; // Number of Powervalve Maps
+  uint8_t POWERVALVEMAPS_COUNT = 4; // Number of Powervalve Maps
   uint8_t ENABLED_POWERVALVEMAPS_R = UINT8_MAX; // View/Load Power Valve Maps (1 bit for each map)
   uint8_t ENABLED_POWERVALVEMAPS_W = UINT8_MAX; // Edit of Power Valve Maps (1 bit for each map)
   bool ENABLE_POWERJET = true; // Enable powerjet
@@ -102,7 +112,7 @@ typedef struct {
   // sensors TODO
   bool ENABLE_SENSOR_EGT = true;
   bool ENABLE_SENSOR_EGT_CONFIG_W = true;
-  bool ENABLE_SENSOR_THERMO = true
+  bool ENABLE_SENSOR_THERMO = true;
   bool ENABLE_SENSOR_THERMO_CONFIG_W = true;
   bool ENABLE_SENSOR_AIRPRESSURE = true;
   bool ENABLE_SENSOR_AIRPRESSURE_CONFIG_W = true;
@@ -113,10 +123,11 @@ typedef struct {
   bool ENABLE_RUNTIMERESET = true; // Possibility to reset Runtime
   
   // custom settings
-  uint8_t POWERVALVE_MAX_APERTURE_PERCENT = 100; 
+  uint8_t POWERVALVE_MAX_APERTURE_PERCENT = 100;
+  unsigned int SERVO_FREQUENCY = 330;
 } FeaturesStruct;
 
-#define FEATURES_PARAM(id, field) { id, sizeof(FeaturesStruct::field), (uint16_t)offsetof(CountersStruct, field) }
+#define FEATURES_PARAM(id, field) { id, sizeof(FeaturesStruct::field), (uint16_t)offsetof(FeaturesStruct, field) }
 
 static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(1, VALID),
@@ -168,8 +179,10 @@ static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(47, ENABLE_SENSOR_KNOCK_CONFIG_W),
   FEATURES_PARAM(48, ENABLE_LOGGER),
   FEATURES_PARAM(49, ENABLE_RUNTIMERESET),
-  FEATURES_PARAM(50, POWERVALVE_MAX_APERTURE_PERCENT)  
+  FEATURES_PARAM(50, POWERVALVE_MAX_APERTURE_PERCENT),
+  FEATURES_PARAM(51, SERVO_FREQUENCY)
 };
+#define FEATURES_PARAM_MAXID 51
 
 static const uint8_t FEATURES_PARAMS_COUNT = sizeof(FEATURES_PARAMS_TABLE) / sizeof(FEATURES_PARAMS_TABLE[0]);
 
