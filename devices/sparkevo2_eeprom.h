@@ -13,11 +13,6 @@
 #define DEVICE_TYPE_ITRONIX_B 11
 #define DEVICE_TYPE_ITRONIX_B_ECU 12
 
-#define PARTNERID_CRE 1
-#define PARTNERID_RAPPA 2
-#define PARTNERID_ALFATEH 3
-#define PARTNERID_VALERACING 4
-
 struct MemoryRecord {
   uint8_t id;
   uint8_t size;
