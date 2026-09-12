@@ -68,6 +68,7 @@ typedef struct {
   uint8_t ENABLE_MODE = 0; 						// ignored
   bool ENABLE_BLE = true; 						// Use BLE connection
   bool ENABLE_CONFIG_W = true; 					// [PIN] Edit of Configuration
+  bool ENABLE_CONFIG_R = true; 					// [PIN] Read of Configuration
   bool ENABLE_FWUPGRADE = true; 				// Possibility to upgrade the FW by user
   uint8_t TIMINGMAPS_COUNT = 4; 				// Number of Timing Maps
   bool ENABLE_BASETIMING_CONFIG_W = true; 		// [PIN] Edit of Base Timing
@@ -110,8 +111,8 @@ typedef struct {
   // sensors
   bool ENABLE_SENSOR_EGT = true; 				// Enable EGT Sensor
   bool ENABLE_SENSOR_EGT_CONFIG_W = true;		// [PIN] Edit of EGT Sensor
-  bool ENABLE_SENSOR_THERMO = true;				// Enable Thermocouple
-  bool ENABLE_SENSOR_THERMO_CONFIG_W = true;	// [PIN] Edit of Thermocouple
+  bool ENABLE_SENSOR_ENGINETEMPERATURE = true;	// Enable Engine Temperature
+  bool ENABLE_SENSOR_ENGINETEMPERATURE_CONFIG_W = true;	// [PIN] Edit of Engine Temperature
   bool ENABLE_SENSOR_AIRPRESSURE = true;		// Enable Airpressure Sensor
   bool ENABLE_SENSOR_AIRPRESSURE_CONFIG_W = true;// [PIN] Edit of Airpressure Sensor
   bool ENABLE_SENSOR_KNOCK = true;				// Enable Knock Sensor
@@ -124,7 +125,7 @@ typedef struct {
   
   // custom settings
   uint8_t POWERVALVE_MAX_APERTURE_PERCENT = 100;// [PIN] Max PV aperture
-  unsigned short SERVO_FREQUENCY = 330;			// Servo frequency
+  unsigned short ENABLED_SERVO_TYPES = 1;		// Enabled Servo types (bitmask: b0:330hz, b1:200hz)
 } FeaturesStruct;
 
 #define FEATURES_PARAM(id, field) { id, sizeof(FeaturesStruct::field), (uint16_t)offsetof(FeaturesStruct, field) }
@@ -136,6 +137,7 @@ static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(4, ENABLE_MODE),
   FEATURES_PARAM(5, ENABLE_BLE),
   FEATURES_PARAM(6, ENABLE_CONFIG_W),
+  FEATURES_PARAM(55, ENABLE_CONFIG_R),
   FEATURES_PARAM(7, ENABLE_FWUPGRADE),
   FEATURES_PARAM(8, TIMINGMAPS_COUNT),
   FEATURES_PARAM(9, ENABLE_BASETIMING_CONFIG_W),
@@ -172,8 +174,8 @@ static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(39, ENABLE_TACHOUT_CONFIG_W),
   FEATURES_PARAM(40, ENABLE_SENSOR_EGT),
   FEATURES_PARAM(41, ENABLE_SENSOR_EGT_CONFIG_W),
-  FEATURES_PARAM(42, ENABLE_SENSOR_THERMO),
-  FEATURES_PARAM(43, ENABLE_SENSOR_THERMO_CONFIG_W),
+  FEATURES_PARAM(42, ENABLE_SENSOR_ENGINETEMPERATURE),
+  FEATURES_PARAM(43, ENABLE_SENSOR_ENGINETEMPERATURE_CONFIG_W),
   FEATURES_PARAM(44, ENABLE_SENSOR_AIRPRESSURE),
   FEATURES_PARAM(45, ENABLE_SENSOR_AIRPRESSURE_CONFIG_W),
   FEATURES_PARAM(46, ENABLE_SENSOR_KNOCK),
@@ -183,9 +185,9 @@ static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(48, ENABLE_DATALOGGER),
   FEATURES_PARAM(49, ENABLE_RUNTIMERESET),
   FEATURES_PARAM(50, POWERVALVE_MAX_APERTURE_PERCENT),
-  FEATURES_PARAM(51, SERVO_FREQUENCY)
+  FEATURES_PARAM(51, ENABLED_SERVO_TYPES)
 };
-#define FEATURES_PARAM_MAXID 54
+#define FEATURES_PARAM_MAXID 55
 
 static const uint8_t FEATURES_PARAMS_COUNT = sizeof(FEATURES_PARAMS_TABLE) / sizeof(FEATURES_PARAMS_TABLE[0]);
 
