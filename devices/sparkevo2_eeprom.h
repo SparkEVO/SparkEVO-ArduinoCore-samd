@@ -126,6 +126,7 @@ typedef struct {
   // custom settings
   uint8_t POWERVALVE_MAX_APERTURE_PERCENT = 100;// [PIN] Max PV aperture
   unsigned short ENABLED_SERVO_TYPES = 1;		// Enabled Servo types (bitmask: b0:330hz, b1:200hz)
+  bool ENABLE_PVNEGCMD = 0;						// Force possibility to use PV_NEG_CMD in old HW Revs
 } FeaturesStruct;
 
 #define FEATURES_PARAM(id, field) { id, sizeof(FeaturesStruct::field), (uint16_t)offsetof(FeaturesStruct, field) }
@@ -185,9 +186,10 @@ static const MemoryParamDescriptor FEATURES_PARAMS_TABLE[] = {
   FEATURES_PARAM(48, ENABLE_DATALOGGER),
   FEATURES_PARAM(49, ENABLE_RUNTIMERESET),
   FEATURES_PARAM(50, POWERVALVE_MAX_APERTURE_PERCENT),
-  FEATURES_PARAM(51, ENABLED_SERVO_TYPES)
+  FEATURES_PARAM(51, ENABLED_SERVO_TYPES),
+  FEATURES_PARAM(56, ENABLE_PVNEGCMD)
 };
-#define FEATURES_PARAM_MAXID 55
+#define FEATURES_PARAM_MAXID 56
 
 static const uint8_t FEATURES_PARAMS_COUNT = sizeof(FEATURES_PARAMS_TABLE) / sizeof(FEATURES_PARAMS_TABLE[0]);
 
