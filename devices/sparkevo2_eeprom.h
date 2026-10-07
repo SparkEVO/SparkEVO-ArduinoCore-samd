@@ -55,11 +55,11 @@ typedef struct {
 } __attribute__((packed)) Eeprom0LegacyStruct;
 
 typedef enum {
-  MULTIPRP_FUNC_QUICKSHIFT_D = 0,  // Digital Quick Shift
-  MULTIPRP_FUNC_QUICKSHIFT_A = 1,  // Analog Quick Shift
-  MULTIPRP_FUNC_SWITCHOFF = 2,     // Engine switch Off from push button
-  MULTIPRP_FUNC_LAUNCHCTRL = 3     // Launch Control
-} MultiPurposeFunctionType;
+  GEAR_SHIFT_FUNCTION_QUICKSHIFT_D = 0,  // Digital Quick Shift
+  GEAR_SHIFT_FUNCTION_QUICKSHIFT_A = 1,  // Analog Quick Shift
+  GEAR_SHIFT_FUNCTION_SWITCHOFF = 2,     // Engine switch Off from push button
+  GEAR_SHIFT_FUNCTION_LAUNCHCTRL = 3     // Launch Control
+} GearShiftFunctionType;
 
 typedef struct {
   bool VALID = false;
@@ -222,5 +222,5 @@ typedef struct {
   bool ENABLE_DATALOGGER;
   bool ENABLE_RUNTIMERESET;
   uint8_t POWERVALVE_MAX_APERTURE_PERCENT; 
-  MultiPurposeFunctionType MULTIPRP_DEFAULT_TYPE;
+  GearShiftFunctionType GEAR_SHIFT_DEFAULT_TYPE;
 } __attribute__((packed)) FeaturesLegacyStruct;
